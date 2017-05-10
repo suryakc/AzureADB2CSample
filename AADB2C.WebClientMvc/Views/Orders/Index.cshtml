@@ -1,0 +1,38 @@
+﻿@model IEnumerable<AADB2C.WebClientMvc.Controllers.OrderModel>
+@{
+    ViewBag.Title = "Orders";
+}
+<h2>Orders</h2>
+<br />
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+ 
+<table class="table table-bordered table-striped table-hover table-condensed" style="table-layout: auto">
+    <thead>
+    <tr>
+        <td>Order Id</td>
+        <td>Shipper</td>
+        <td>Shipper City</td>
+        <td>Date</td>
+    </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipperName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipperCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TS)
+            </td>
+        </tr>
+    }
+</table>
+
