@@ -7,6 +7,7 @@ using Owin;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Threading.Tasks;
@@ -74,7 +75,40 @@ namespace AADB2C.WebClientMvc
                 PostLogoutRedirectUri = RedirectUri,
                 Notifications = new OpenIdConnectAuthenticationNotifications
                 {
+                    RedirectToIdentityProvider = (context) =>
+                    {
+
+                        //string uiLocales = context.OwinContext.Get<string>(OpenIdConnectParameterNames.UiLocales);
+                        //if (!string.IsNullOrEmpty(uiLocales))
+                        //{
+                        //    context.ProtocolMessage.Parameters.Add(OpenIdConnectParameterNames.UiLocales, uiLocales);
+                        //}
+                        context.ProtocolMessage.Parameters.Add(OpenIdConnectParameterNames.UiLocales, "hi");
+                        Debug.WriteLine("*** RedirectToIdentityProvider");
+                        return Task.FromResult(0);
+                    },
+                    MessageReceived = (context) =>
+                    {
+                        Debug.WriteLine("*** MessageReceived");
+                        return Task.FromResult(0);
+                    },
+                    SecurityTokenReceived = (context) =>
+                    {
+                        Debug.WriteLine("*** SecurityTokenReceived");
+                        return Task.FromResult(0);
+                    },
+                    SecurityTokenValidated = (context) =>
+                    {
+                        Debug.WriteLine("*** SecurityTokenValidated");
+                        return Task.FromResult(0);
+                    },
+                    AuthorizationCodeReceived = (context) =>
+                    {
+                        Debug.WriteLine("*** AuthorizationCodeReceived");
+                        return Task.FromResult(0);
+                    },
                     AuthenticationFailed = AuthenticationFailed
+                    //AuthorizationCodeReceived = AuthorizationCodeReceived
                 },
                 Scope = "openid",
                 ResponseType = "id_token",
@@ -88,5 +122,9 @@ namespace AADB2C.WebClientMvc
             };
         }
 
+        private Task AuthorizationCodeReceived(AuthorizationCodeReceivedNotification authorizationCodeReceivedNotification)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
