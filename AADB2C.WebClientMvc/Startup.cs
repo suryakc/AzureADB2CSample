@@ -83,7 +83,7 @@ namespace AADB2C.WebClientMvc
                         //{
                         //    context.ProtocolMessage.Parameters.Add(OpenIdConnectParameterNames.UiLocales, uiLocales);
                         //}
-                        context.ProtocolMessage.Parameters.Add(OpenIdConnectParameterNames.UiLocales, "hi");
+                        context.ProtocolMessage.Parameters.Add(OpenIdConnectParameterNames.UiLocales, "en");
                         Debug.WriteLine("*** RedirectToIdentityProvider");
                         return Task.FromResult(0);
                     },
